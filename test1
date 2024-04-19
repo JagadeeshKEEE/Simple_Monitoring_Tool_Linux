@@ -1,0 +1,59 @@
+#!/bin/bash
+monitor_cpu(){
+   echo "=====================================CPU Usage====================================="
+   top -bn1 | grep "Cpu(s):"
+   echo""
+}
+monitor_memory(){
+   echo "=====================================Memory Usage====================================="
+   free -m
+   echo""
+}
+monitor_disk(){
+   echo "=====================================Disk Usage====================================="
+   df -h
+   echo""
+}
+monitor_network(){
+   echo "=====================================Network Interface====================================="
+   ifconfig
+   echo""
+}
+monitor_process(){
+   echo "=====================================Top Processes by CPU Usage====================================="
+    ps -eo pid,ppid,cmd,%cpu,%mem --sort=-%cpu | head -n 6
+    echo""
+    echo "=====================================Top Processes by Memory Usage====================================="
+    ps -eo pid,ppid,cmd,%cpu,%mem --sort=-%mem | head -n 6
+    echo""
+}
+system_info() {
+    echo "=====================================System Information====================================="
+    uname -a
+    echo""
+    echo "=====================================Uptime====================================="
+    uptime
+    echo""
+    echo "=====================================Hardware Information====================================="
+    lscpu
+    echo""
+    echo "=====================================User Activity====================================="
+    last
+    echo""
+}
+
+main(){
+   monitor_cpu
+   echo""
+   monitor_memory
+   echo""
+   monitor_disk
+   echo""
+   monitor_network
+   echo""
+   monitor_process
+   echo""
+   system_info
+}
+
+main
